@@ -1,6 +1,8 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -9,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4%o*6z^hszqymi-o@#+=r(u)@824!2+x6og!y8tet@ry817r)m'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -124,7 +126,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_RATES': {
-        'user': '500/day',  # límite por usuario por día.
+        'user': '1/min',  # límite por usuario por día.
         # límite por dirección IP por día para usuarios no autenticados.
         'anon': '500/day',
         'burst': '60/min',  # Límite de rafagas por minuto

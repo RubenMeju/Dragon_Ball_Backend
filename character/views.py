@@ -4,14 +4,7 @@ from .serializers import CharacterSerializer, PlanetSerializer, TransformationSe
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema
 from rest_framework.throttling import UserRateThrottle
-from django.http import JsonResponse
 import django_filters
-
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-# Vista para el frontend sin limitar las peticiones
 
 
 @extend_schema(exclude=True)
@@ -29,14 +22,11 @@ class CharacterFilter(django_filters.FilterSet):
         fields = ['name', 'race']
 
 
-# Vista para listar personajes (Character)
-
-
 class CharacterListView(generics.ListAPIView):
     queryset = Character.objects.all()
     serializer_class = CharacterSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_class = CharacterFilter  # Usamos la clase de filtro personalizado
+    filterset_class = CharacterFilter
 
 
 # vista para listar personaje por id
